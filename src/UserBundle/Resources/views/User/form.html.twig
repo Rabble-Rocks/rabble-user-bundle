@@ -1,0 +1,52 @@
+{% trans_default_domain 'RabbleUserBundle' %}
+{% if heading|default %}
+    <h4 class="c-grey-900 mB-20">{{ heading }}</h4>
+{% endif %}
+<div class="row">
+    <div class="col-sm-8 col-lg-9 col-xl-10">
+        {{ form_row(form.username) }}
+    </div>
+    <div class="col-sm-4 col-lg-3 col-xl-2">
+        {{ form_row(form.userRoles) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_row(form.password.first) }}
+    </div>
+    <div class="col-sm-6">
+        {{ form_row(form.password.second) }}
+    </div>
+</div>
+<h5 class="c-grey-900 mB-10">{{ 'user.edit_personal'|trans }}</h5>
+<hr/>
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_row(form.firstName) }}
+    </div>
+    <div class="col-sm-6">
+        {{ form_row(form.lastName) }}
+    </div>
+</div>
+{% if user is defined and user.id is not null %}
+    <div class="row">
+        <div class="col-sm-8 col-md-10">
+            {{ form_row(form.imageFile) }}
+        </div>
+        <div class="col-sm-4 col-md-2 d-sm-flex d-none stron">
+            <div class="row">
+                <div class="col-12 text-center font-weight-bold">
+                    <label>{{ 'form.current_image'|trans }}</label>
+                </div>
+                {% set avatar = asset('admin/build/assets/static/images/default-avatar.png') %}
+                {% if user.avatar is defined and user.avatar is not null %}
+                    {% set avatar = user.avatar %}
+                {% endif %}
+                <div class="col-12 text-center">
+                    <img class="img-fluid bdrs-50p" src="{{ avatar }}" alt="avatar"/>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{{ form_widget(form) }}

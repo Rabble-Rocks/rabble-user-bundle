@@ -1,0 +1,21 @@
+{% extends '@RabbleAdmin/Layout/base.html.twig' %}
+{% trans_default_domain 'RabbleUserBundle' %}
+{% block title %}{{ 'menu.user'|trans }} - {{ user.firstName }} {{ user.lastName }}{% endblock %}
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% for panes in leftPanes %}
+                {% for leftPane in panes %}
+                    {{ rabble_admin_ui(leftPane) }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="col-md-8">
+            {% for panes in rightPanes %}
+                {% for rightPane in panes %}
+                    {{ rabble_admin_ui(rightPane) }}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

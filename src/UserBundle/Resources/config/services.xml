@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/admin_builder.xml"/>
+        <import resource="services/command.xml"/>
+        <import resource="services/controller.xml"/>
+        <import resource="services/doctrine.xml"/>
+        <import resource="services/search.xml"/>
+        <import resource="services/security.xml"/>
+        <import resource="services/user_activity.xml"/>
+        <import resource="services/menu.xml"/>
+        <import resource="services/datatable.xml"/>
+        <import resource="services/form.xml"/>
+    </imports>
+    <parameters>
+        <parameter key="rabble_user.routing_listener.class">Rabble\UserBundle\Routing\RoutingListener</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_user.routing_listener" class="%rabble_user.routing_listener.class%">
+            <tag name="kernel.event_listener" event="rabble_admin.routing.load" method="onRoutingLoad"/>
+        </service>
+    </services>
+</container>

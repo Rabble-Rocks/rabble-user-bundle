@@ -1,0 +1,43 @@
+{% extends '@RabbleAdmin/Layout/base.html.twig' %}
+{% trans_default_domain 'RabbleUserBundle' %}
+{% form_theme form with ['@RabbleUser/Role/form.html.twig'] %}
+
+{% block page_content %}
+    <h4 class="c-grey-900 mT-10 mB-30">{% block title %}{{ 'role.heading.edit'|trans }}{% endblock %}</h4>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-12">
+            <div class="row mb-2">
+                <div class="col-sm-4 col-lg-3 col-xl-2 mb-2">
+                    <div class="row">
+                        {% if is_granted('role.view') %}
+                            <div class="col-6 pr-0">
+                                <a href="{{ path('rabble_admin_role_index') }}" class="btn btn-secondary mr-2 btn-block h0"><i class="fa fa-arrow-circle-left"></i> {{ 'back'|trans }}</a>
+                            </div>
+                        {% endif %}
+                        <div class="col-6 px-sm-1">
+                            <button type="submit" class="btn btn-info btn-block"><i class="fa fa-check"></i> {{ 'form.submit'|trans }}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-9 col-xl-10">
+                    {% include '@RabbleAdmin/flash_messages.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+            <div class="bgc-white bd bdrs-3 p-20 mB-20 w-100p">
+                {{ form_row(form.name) }}
+                {{ form_label(form.parent) }}
+                {{ form_widget(form.parent) }}
+                <small class="c-grey-700 d-block mt-1">{{ 'form.role.info.parent'|trans }}</small>
+            </div>
+        </div>
+        <div class="col-xl-8 col-lg-6">
+            <div class="bgc-white bd bdrs-3 p-20 mB-20 w-100p">
+                {{ form_row(form.tasks) }}
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

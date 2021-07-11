@@ -1,0 +1,23 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <entity name="Rabble\UserBundle\Entity\UserActivity">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="type" type="string" nullable="false" />
+        <field name="translationId" type="text" nullable="false" />
+        <field name="translationParams" type="json_array" nullable="true" />
+        <field name="url" type="string" nullable="true" />
+        <field name="payload" type="json_array" nullable="true" />
+        <many-to-one field="user" target-entity="User" />
+        <field name="createdAt" type="datetime" nullable="false">
+            <gedmo:timestampable on="create"/>
+        </field>
+        <field name="updatedAt" type="datetime" nullable="false">
+            <gedmo:timestampable on="update"/>
+        </field>
+    </entity>
+</doctrine-mapping>

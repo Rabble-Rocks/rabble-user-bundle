@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="rabble_user.user_activity.activity_types" class="Doctrine\Common\Collections\ArrayCollection" />
+        <service id="rabble_user.user_activity.audit_activity_type" class="Rabble\UserBundle\UserActivity\AuditActivity\AuditActivityType">
+            <tag name="rabble_user.user_activity_type" />
+        </service>
+        <service id="Rabble\UserBundle\UserActivity\EventListener\AuditSubscriber">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <tag name="kernel.event_subscriber" />
+            <tag name="doctrine.event_listener" event="preRemove" />
+        </service>
+        <service id="Rabble\UserBundle\UserActivity\EventListener\UserActivityViewSubscriber">
+            <argument type="service" id="twig"/>
+            <argument type="service" id="rabble_user.user_activity.activity_types"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="translator"/>
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

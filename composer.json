@@ -1,0 +1,29 @@
+{
+    "name": "rabble/datatable-bundle",
+    "type": "symfony-bundle",
+    "description": "Adds user and permission management to Rabble, as well as a way to login to the admin panel.",
+    "keywords": ["rabble", "admin", "user", "role", "permissions"],
+    "homepage": "https://rabble.rocks",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rachel Snijders",
+            "email": "rainbowvision.bn@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "rabble/admin-bundle": "*",
+        "rabble/datatable-bundle": "*",
+        "doctrine/orm": "^2.7",
+        "damienharper/doctrine-audit-bundle": "^3.4"
+    },
+    "autoload": {
+        "psr-4": { "Rabble\\UserBundle\\": "src/UserBundle" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

@@ -1,0 +1,20 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+{% block _role_tasks_widget %}
+    {% set bundle = null %}
+    <div class="row">
+    {% for child in form.children %}
+        {% set currentBundle = child.vars.value|split('.')|first %}
+        {% if bundle is not same as(currentBundle) %}
+            {% if not loop.first %}
+                </div>
+            {% endif %}
+            <div class="col-xl-4 col-sm-6">
+            <h6 class="c-grey-900">{{ ('task_bundle.' ~ currentBundle)|trans([], 'security') }}</h6>
+        {% endif %}
+        {{ form_widget(child) }}
+        {% if bundle is not same as(currentBundle) %}
+            {% set bundle = currentBundle %}
+        {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

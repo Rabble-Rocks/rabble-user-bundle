@@ -1,0 +1,8 @@
+{% extends '@RabbleAdmin/Layout/base.html.twig' %}
+{% trans_default_domain 'RabbleUserBundle' %}
+{% block title %}{{ 'menu.user.create'|trans }}{% endblock %}
+{% block page_content %}
+    {% for pane in panes %}
+        {{ rabble_admin_ui(pane) }}
+    {% endfor %}
+{% endblock %}

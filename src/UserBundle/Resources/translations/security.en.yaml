@@ -1,0 +1,15 @@
+task_bundle:
+  user: User management
+  role: Permissions
+task:
+  user:
+    view: View
+    create: Add
+    edit: Edit
+    delete: Delete
+  role:
+    view: List Roles
+    edit: Edit Role
+    create: Add Role
+    delete: Delete Role
+    overrule: Overrule all roles

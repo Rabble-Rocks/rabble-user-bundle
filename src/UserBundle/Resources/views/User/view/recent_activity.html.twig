@@ -1,0 +1,10 @@
+{% trans_default_domain 'RabbleUserBundle' %}
+<h5 class="c-grey-900 mT-10">{{ 'user.recent_activity'|trans }}</h5>
+<hr/>
+{% for item in items %}
+    {% include item.template with item.context only %}
+    <hr/>
+{% endfor %}
+{% if items|length == 0 %}
+    <p class="font-italic">{{ 'user.recent_activity_empty'|trans }}</p>
+{% endif %}

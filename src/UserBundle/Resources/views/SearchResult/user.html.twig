@@ -1,0 +1,23 @@
+{% trans_default_domain 'RabbleUserBundle' %}
+{% set user = result.getExtra('user') %}
+{% set avatar = asset('admin/build/assets/static/images/default-avatar.png') %}
+{% if user.avatar is defined and user.avatar is not null %}
+    {% set avatar = user.avatar %}
+{% endif %}
+<a href="{{ result.uri }}" target="_blank">
+    <div class="card mb-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-1 col-lg-2 col-sm-3 d-sm-block d-none">
+                    <img src="{{ avatar }}" class="img-fluid bdrs-50p" alt="{{ result.title }}"/>
+                </div>
+                <div class="col-xl-11 col-lg-10 col-sm-9">
+                    <button class="btn btn-primary pull-right">{{ 'user.view_profile'|trans }}</button>
+                    <h5 class="mb-0 c-grey-900">{{ result.title }}</h5>
+                    <h6 class="mb-0 text-muted">@{{ user.username }}</h6>
+                    <h6 class="badge badge-info">{{ result.type }}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

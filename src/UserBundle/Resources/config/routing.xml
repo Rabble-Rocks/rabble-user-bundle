@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing
+        http://symfony.com/schema/routing/routing-1.0.xsd">
+    <route id="rabble_admin_user_index" controller="rabble_user.controller.user::indexAction" path="/user"/>
+    <route id="rabble_admin_user_view" controller="rabble_user.controller.user::viewAction" path="/user/{user}">
+        <requirement key="user">\d+</requirement>
+    </route>
+    <route id="rabble_admin_user_create" controller="rabble_user.controller.user::createAction" path="/user/create"/>
+    <route id="rabble_admin_user_edit" controller="rabble_user.controller.user::editAction" path="/user/{user}/edit">
+        <requirement key="user">\d+</requirement>
+    </route>
+    <route id="rabble_admin_user_delete" controller="rabble_user.controller.user::deleteAction" path="/user/{user}/delete">
+        <requirement key="user">\d+</requirement>
+    </route>
+    <route id="rabble_admin_role_index" controller="rabble_user.controller.role::indexAction" path="/role"/>
+    <route id="rabble_admin_role_crete" controller="rabble_user.controller.role::createAction" path="/role/create"/>
+    <route id="rabble_admin_role_edit" controller="rabble_user.controller.role::editAction" path="/role/{role}/edit">
+        <requirement key="role">\d+</requirement>
+    </route>
+    <route id="rabble_admin_role_delete" controller="rabble_user.controller.role::deleteAction" path="/role/{role}/delete">
+        <requirement key="role">\d+</requirement>
+    </route>
+</routes>

@@ -1,0 +1,6 @@
+audit.view_details: View details
+audit.insert.user: '%user% created user %subjectFormatted%.'
+audit.update.user: '%user% updated user %subjectFormatted%.'
+audit.remove.user: '%user% deleted user %subjectFormatted%.'
+audit.associate.user: '%user% associated user %subjectFormatted%.'
+audit.dissociate.user: '%user% dissociated user %subjectFormatted%.'

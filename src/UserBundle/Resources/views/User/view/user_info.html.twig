@@ -1,0 +1,29 @@
+{% trans_default_domain 'RabbleUserBundle' %}
+<div class="bgc-white bd bdrs-3 p-20 mB-20 text-center">
+    {% if is_granted('user.edit') and (is_granted(user) or is_granted('role.overrule')) %}
+        <a href="{{ path('rabble_admin_user_edit', {'user': user.id}) }}"
+           class="pull-right btn btn-success btn-sm"><i class="fa fa-pencil"></i> {{ 'user.modify'|trans }}
+        </a>
+    {% endif %}
+    <div class="clearfix"></div>
+    {% set avatar = asset('admin/build/assets/static/images/default-avatar.png') %}
+    {% if user.avatar is defined and user.avatar is not null %}
+        {% set avatar = user.avatar %}
+    {% endif %}
+    <div class="row">
+        <div class="col-6 offset-3">
+            <img class="img-fluid bdrs-50p" src="{{ avatar }}" alt="avatar"/>
+        </div>
+    </div>
+    <h4 class="c-grey-900 mT-10">{{ user.firstName }} {{ user.lastName }}</h4>
+    <h6 class="mB-30">@{{ user.username }}</h6>
+    {% for row in actionRow %}
+        <div{% if not loop.last %} class="mb-2"{% endif %}>
+            {{ rabble_admin_ui(row) }}
+        </div>
+    {% endfor %}
+    <hr/>
+    <p class="{% if user.bio %}c-grey-900{% else %}font-italic small{% endif %}">
+        {{ (user.bio|default('user.bio_empty'|trans))|nl2br }}
+    </p>
+</div>

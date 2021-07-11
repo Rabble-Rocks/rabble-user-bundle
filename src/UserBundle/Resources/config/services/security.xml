@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="rabble_user.security.task_voter.class">Rabble\UserBundle\Security\Voter\TaskVoter</parameter>
+    </parameters>
+    <services>
+        <service id="Rabble\UserBundle\Security\AdminAuthenticator">
+            <argument type="service" id="router.default" />
+            <argument type="service" id="security.csrf.token_manager" />
+            <argument type="service" id="security.user_password_encoder.generic" />
+        </service>
+
+        <service id="rabble_user.security.task_collection" class="Rabble\UserBundle\Security\Task\TaskCollection" />
+        <service id="rabble_user.task_bundle.user" class="Rabble\UserBundle\Security\Task\TaskBundle">
+            <argument>user</argument>
+            <argument type="collection">
+                <argument>view</argument>
+                <argument>create</argument>
+                <argument>edit</argument>
+                <argument>delete</argument>
+            </argument>
+            <tag name="rabble.task_bundle" />
+        </service>
+        <service id="rabble_user.task_bundle.role" class="Rabble\UserBundle\Security\Task\TaskBundle">
+            <argument>role</argument>
+            <argument type="collection">
+                <argument>view</argument>
+                <argument>create</argument>
+                <argument>edit</argument>
+                <argument>delete</argument>
+                <argument>overrule</argument>
+            </argument>
+            <tag name="rabble.task_bundle" />
+        </service>
+        <service id="rabble_user.security.task_voter" class="%rabble_user.security.task_voter.class%">
+            <argument type="service" id="rabble_user.security.task_collection" />
+            <tag name="security.voter" />
+        </service>
+        <service id="Rabble\UserBundle\Security\Voter\UserVoter">
+            <tag name="security.voter" />
+        </service>
+    </services>
+</container>

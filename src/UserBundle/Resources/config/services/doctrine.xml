@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="rabble_user.entity.user.class">Rabble\UserBundle\Entity\User</parameter>
+        <parameter key="rabble_user.entity.role.class">Rabble\UserBundle\Entity\Role</parameter>
+    </parameters>
+    <services>
+        <service id="rabble_user.entity.user" class="%rabble_user.entity.user.class%" abstract="true">
+            <tag name="rabble.entity_implementation" as="User" />
+        </service>
+        <service id="rabble_user.entity.role" class="%rabble_user.entity.role.class%" abstract="true">
+            <tag name="rabble.entity_implementation" as="Role" />
+        </service>
+        <service id="Rabble\UserBundle\EventListener\Doctrine\AvatarListener">
+            <argument type="service" id="Vich\UploaderBundle\Templating\Helper\UploaderHelper" />
+            <argument type="service" id="liip_imagine.cache.manager" />
+            <tag name="doctrine.event_listener" event="postLoad" />
+        </service>
+        <service id="Rabble\UserBundle\EventListener\Doctrine\Security\ReloadUserListener">
+            <argument type="service" id="security.token_storage" />
+            <tag name="doctrine.event_listener" event="postUpdate" />
+            <tag name="doctrine.event_listener" event="postRemove" />
+        </service>
+        <service id="Rabble\UserBundle\EventListener\Doctrine\Security\PasswordEncoderListener">
+            <argument type="service" id="security.user_password_encoder.generic" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+        </service>
+        <service id="Rabble\UserBundle\Repository\UserRepository">
+            <argument type="service" id="doctrine" />
+            <argument>%rabble_user.entity.user.class%</argument>
+        </service>
+    </services>
+</container>

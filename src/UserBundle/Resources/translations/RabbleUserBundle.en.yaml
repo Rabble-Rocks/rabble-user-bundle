@@ -1,0 +1,55 @@
+menu:
+  user: Users
+  user.edit: Edit user
+  user.create: Add user
+  role: Permissions
+table:
+  role:
+    name: Role name
+  user:
+    username: Username
+    first_name: First name
+    last_name: Last name
+user:
+  modify: Modify
+  create: Add new
+  view_profile: View profile
+  edit_personal: Personal info
+  bio_empty: Looks like this person hasn't filled their biography yet.
+  recent_activity: Recent activity
+  recent_activity_empty: Cricket noises...
+  delete_confirm: Are you sure you want to delete this user?
+role:
+  heading: Roles
+  heading.edit: Edit role
+  heading.create: Create role
+  create: Add new
+  delete_confirm: Are you sure you want to delete this role?
+back: Back
+form:
+  submit: Save
+  role:
+    label:
+      name: Role name
+      parent: Parent role
+      tasks: Permissions
+    info:
+      parent: 'Note: by setting a parent role, this role will have access to the same permissions as their parent, including their own.'
+  user:
+    label:
+      username: Username
+      user_roles: Roles
+      password: Password
+      password_repeat: Repeat password
+      first_name: First name
+      last_name: Last name
+      image_file: Profile image
+      delete_image: Delete profile image
+      bio: Bio
+    placeholder:
+      username: username
+      first_name: John
+      last_name: Doe
+      bio: Introduce yourself!
+  current_image: Current image
+search.type.user: User

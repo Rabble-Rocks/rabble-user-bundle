@@ -1,0 +1,17 @@
+{% trans_default_domain 'user_activity' %}
+<p class="c-grey-900">
+        <span class="text-muted font-italic">
+            {{ activity.createdAt|ago }}
+        </span>
+    {% if activity.url is not null %}
+        <a href="{{ activity.url }}" class="text-muted mL-10" data-toggle="tooltip" data-placement="top" title="{{ 'audit.view_details'|trans }}">
+            <i class="fa fa-undo"></i>
+        </a>
+    {% endif %}
+    <br/>
+    {% set translationParams = {'%user%': '<strong>' ~ activity.user.firstName ~ '</strong>'} %}
+    {% if '%subject%' in activity.translationParams|keys %}
+        {% set translationParams = translationParams|merge({'%subjectFormatted%': '<strong>' ~ activity.translationParams['%subject%'] ~ '</strong>'}) %}
+    {% endif %}
+    {{ activity.translationId|trans(activity.translationParams|merge(translationParams))|raw }}
+</p>
