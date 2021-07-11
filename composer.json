@@ -1,5 +1,5 @@
 {
-    "name": "rabble/datatable-bundle",
+    "name": "rabble/user-bundle",
     "type": "symfony-bundle",
     "description": "Adds user and permission management to Rabble, as well as a way to login to the admin panel.",
     "keywords": ["rabble", "admin", "user", "role", "permissions"],
