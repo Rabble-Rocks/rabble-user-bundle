@@ -9,16 +9,12 @@
         <div class="col-12">
             <div class="row mb-2">
                 <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mb-2">
-                    <div class="row">
-                        {% if is_granted('role.view') %}
-                            <div class="col-6 pr-0">
-                                <a href="{{ path('rabble_admin_role_index') }}" class="btn btn-secondary mr-2 btn-block h0"><i class="fa fa-arrow-circle-left"></i> {{ 'back'|trans }}</a>
-                            </div>
-                        {% endif %}
-                        <div class="col-6 px-sm-1">
-                            <button type="submit" class="btn btn-info btn-block"><i class="fa fa-check"></i> {{ 'form.submit'|trans }}</button>
-                        </div>
-                    </div>
+                    {% if is_granted('role.view') %}
+                        <a href="{{ path('rabble_admin_role_index') }}" class="btn btn-secondary mr-2 btn-block h0"><i
+                                    class="fa fa-arrow-circle-left"></i> {{ 'back'|trans }}</a>
+                    {% endif %}
+                    <button type="submit" class="btn btn-info btn-block"><i
+                                class="fa fa-check"></i> {{ 'form.submit'|trans }}</button>
                 </div>
                 <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10">
                     {% include '@RabbleAdmin/flash_messages.html.twig' %}
