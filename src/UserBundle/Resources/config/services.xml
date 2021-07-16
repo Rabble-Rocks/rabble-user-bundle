@@ -7,6 +7,7 @@
         <import resource="services/command.xml"/>
         <import resource="services/controller.xml"/>
         <import resource="services/doctrine.xml"/>
+        <import resource="services/field_types.xml"/>
         <import resource="services/search.xml"/>
         <import resource="services/security.xml"/>
         <import resource="services/user_activity.xml"/>

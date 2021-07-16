@@ -17,8 +17,8 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
-    private $entityManager;
-    private $checker;
+    private EntityManagerInterface $entityManager;
+    private AuthorizationCheckerInterface $checker;
 
     public function __construct(EntityManagerInterface $entityManager, AuthorizationCheckerInterface $checker)
     {

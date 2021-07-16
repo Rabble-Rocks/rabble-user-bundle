@@ -14,5 +14,9 @@
             <argument type="service" id="doctrine.orm.default_entity_manager" />
             <tag name="form.type" />
         </service>
+        <service id="Rabble\UserBundle\Form\UserChoiceType">
+            <argument type="service" id="Rabble\UserBundle\Repository\UserRepository" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

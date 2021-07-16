@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="rabble_field_type.user_select" class="Rabble\FieldTypeBundle\FieldType\Mapping\FieldTypeMapping">
+            <argument>user_select</argument>
+            <argument>Rabble\UserBundle\FieldType\UserType</argument>
+            <tag>rabble_field_type_mapping</tag>
+        </service>
+        <service id="rabble_field_type.value_resolver.user_select" class="Rabble\UserBundle\ValueResolver\UserValueResolver">
+            <argument type="service" id="Rabble\UserBundle\Repository\UserRepository"/>
+            <tag name="rabble_field_type.value_resolver"/>
+        </service>
+    </services>
+</container>
