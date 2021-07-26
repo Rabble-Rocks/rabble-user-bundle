@@ -33,7 +33,7 @@ class RabbleUserBuilder implements AdminBuilderInterface
             'password' => 'admin',
             'firstName' => 'Admin',
             'lastName' => 'Istrator',
-            '--super-admin' => true,
+            '--super-admin' => '1',
             '--if-not-exists' => true,
             '--env' => $input->getOption('env'),
         ]), $output);
