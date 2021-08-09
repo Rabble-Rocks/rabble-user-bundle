@@ -22,7 +22,7 @@
         <field name="updatedAt" type="datetime" nullable="false">
             <gedmo:timestampable on="update"/>
         </field>
-        <many-to-many field="roles" target-entity="Role" />
+        <many-to-many field="roles" target-entity="Role" index-by="id" />
         <one-to-many field="settings" target-entity="UserSetting"  mapped-by="user">
             <cascade>
                 <cascade-persist />
