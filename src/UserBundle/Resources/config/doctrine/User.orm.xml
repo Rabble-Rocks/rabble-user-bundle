@@ -26,6 +26,7 @@
         <one-to-many field="settings" target-entity="UserSetting"  mapped-by="user">
             <cascade>
                 <cascade-persist />
+                <cascade-remove />
             </cascade>
         </one-to-many>
         <embedded name="image" class="Vich\UploaderBundle\Entity\File" />
