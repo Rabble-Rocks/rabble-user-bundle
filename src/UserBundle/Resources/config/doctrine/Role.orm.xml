@@ -11,7 +11,7 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="name" type="string" nullable="false" unique="true" />
-        <field name="tasks" type="json_array" nullable="false" />
+        <field name="tasks" type="json" nullable="false" />
         <field name="createdAt" type="datetime" nullable="false">
             <gedmo:timestampable on="create"/>
         </field>

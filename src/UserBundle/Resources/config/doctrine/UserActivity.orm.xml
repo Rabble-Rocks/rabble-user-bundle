@@ -9,9 +9,9 @@
         </id>
         <field name="type" type="string" nullable="false" />
         <field name="translationId" type="text" nullable="false" />
-        <field name="translationParams" type="json_array" nullable="true" />
+        <field name="translationParams" type="json" nullable="true" />
         <field name="url" type="string" nullable="true" />
-        <field name="payload" type="json_array" nullable="true" />
+        <field name="payload" type="json" nullable="true" />
         <many-to-one field="user" target-entity="User" />
         <field name="createdAt" type="datetime" nullable="false">
             <gedmo:timestampable on="create"/>
