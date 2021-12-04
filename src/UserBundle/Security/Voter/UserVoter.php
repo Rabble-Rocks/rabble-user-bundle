@@ -21,12 +21,12 @@ class UserVoter implements VoterInterface
             return self::ACCESS_ABSTAIN;
         }
         if (!$user->isSuperAdmin() && $attribute->isSuperAdmin()) {
-            return self::ACCESS_ABSTAIN;
+            return self::ACCESS_DENIED;
         }
         $userRoles = array_flip($user->getRoles());
         foreach ($attribute->getRoles() as $role) {
             if (!isset($userRoles[$role])) {
-                return self::ACCESS_ABSTAIN;
+                return self::ACCESS_DENIED;
             }
         }
 
