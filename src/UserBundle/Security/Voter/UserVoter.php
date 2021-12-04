@@ -20,7 +20,10 @@ class UserVoter implements VoterInterface
         if (!$attribute instanceof User || !$user instanceof User) {
             return self::ACCESS_ABSTAIN;
         }
-        if (!$user->isSuperAdmin() && $attribute->isSuperAdmin()) {
+        if ($user->isSuperAdmin()) {
+            return self::ACCESS_GRANTED;
+        }
+        if ($attribute->isSuperAdmin()) {
             return self::ACCESS_DENIED;
         }
         $userRoles = array_flip($user->getRoles());
