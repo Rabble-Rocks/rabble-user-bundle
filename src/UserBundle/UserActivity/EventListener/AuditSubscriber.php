@@ -2,8 +2,7 @@
 
 namespace Rabble\UserBundle\UserActivity\EventListener;
 
-use DH\DoctrineAuditBundle\Event\LifecycleEvent;
-use DH\DoctrineAuditBundle\Manager\AuditManager;
+use DH\Auditor\Event\LifecycleEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Rabble\UserBundle\Entity\User;
@@ -39,7 +38,7 @@ class AuditSubscriber implements EventSubscriberInterface
         }
         $entity = $this->entityManager->find($payload['entity'], $payload['object_id']);
         $blameUser = $this->entityManager->find('User', $payload['blame_id']);
-        if (null === $entity && AuditManager::OPERATION_TYPE_REMOVE === $payload['type'] && isset($this->removedEntities[$payload['entity']][$payload['object_id']])) {
+        if (null === $entity && 'remove' === $payload['type'] && isset($this->removedEntities[$payload['entity']][$payload['object_id']])) {
             $entity = $this->removedEntities[$payload['entity']][$payload['object_id']];
         }
         if (null === $entity || !$blameUser instanceof User) {
