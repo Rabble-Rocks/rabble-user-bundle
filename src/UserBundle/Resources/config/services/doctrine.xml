@@ -24,7 +24,7 @@
             <tag name="doctrine.event_listener" event="postRemove" />
         </service>
         <service id="Rabble\UserBundle\EventListener\Doctrine\Security\PasswordEncoderListener">
-            <argument type="service" id="security.user_password_encoder.generic" />
+            <argument type="service" id="security.user_password_hasher" />
             <tag name="doctrine.event_listener" event="preUpdate" />
             <tag name="doctrine.event_listener" event="prePersist" />
         </service>

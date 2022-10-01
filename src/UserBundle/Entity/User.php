@@ -11,6 +11,7 @@ use Rabble\UserBundle\UserActivity\AuditActivity\AuditSubjectInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Entity\File as EmbeddedFile;
@@ -20,7 +21,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Vich\Uploadable
  * @UniqueEntity("username")
  */
-class User implements UserInterface, \Serializable, EquatableInterface, AuditSubjectInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable, EquatableInterface, AuditSubjectInterface
 {
     use Timestampable;
 
@@ -65,7 +66,7 @@ class User implements UserInterface, \Serializable, EquatableInterface, AuditSub
     /**
      * @return string[]
      */
-    public function getRoles()
+    public function getRoles(): array
     {
         $roles = ['ROLE_RABBLE_ADMIN'];
         $children = [];
@@ -171,10 +172,7 @@ class User implements UserInterface, \Serializable, EquatableInterface, AuditSub
         $this->username = $username;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -306,7 +304,7 @@ class User implements UserInterface, \Serializable, EquatableInterface, AuditSub
     /**
      * @return bool
      */
-    public function isEqualTo(UserInterface $user)
+    public function isEqualTo(UserInterface $user): bool
     {
         return $this->username === $user->getUserIdentifier();
     }

@@ -7,10 +7,10 @@
         <parameter key="rabble_user.controller.role.class">Rabble\UserBundle\Controller\RoleController</parameter>
     </parameters>
     <services>
-        <service id="rabble_user.controller.user" class="%rabble_user.controller.user.class%" autowire="true">
+        <service id="rabble_user.controller.user" class="%rabble_user.controller.user.class%" autowire="true" autoconfigure="true">
             <tag name="controller.service_arguments"/>
         </service>
-        <service id="rabble_user.controller.role" class="%rabble_user.controller.role.class%" autowire="true">
+        <service id="rabble_user.controller.role" class="%rabble_user.controller.role.class%" autowire="true" autoconfigure="true">
             <tag name="controller.service_arguments"/>
         </service>
     </services>

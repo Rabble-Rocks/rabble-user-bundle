@@ -5,15 +5,15 @@ namespace Rabble\UserBundle\EventListener\Doctrine\Security;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Rabble\UserBundle\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PasswordEncoderListener
 {
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordHasher;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
-        $this->passwordEncoder = $passwordEncoder;
+        $this->passwordHasher = $passwordHasher;
     }
 
     public function preUpdate(PreUpdateEventArgs $args): void
@@ -33,7 +33,7 @@ class PasswordEncoderListener
             if ($args instanceof PreUpdateEventArgs && !$args->hasChangedField('password')) {
                 return;
             }
-            $entity->setPassword($this->passwordEncoder->encodePassword($entity, $entity->getPassword()));
+            $entity->setPassword($this->passwordHasher->hashPassword($entity, $entity->getPassword()));
         }
     }
 }

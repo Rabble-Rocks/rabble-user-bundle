@@ -2,6 +2,7 @@
 
 namespace Rabble\UserBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Rabble\UserBundle\Entity\Role;
 use Rabble\UserBundle\Form\RoleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -26,16 +27,15 @@ class RoleController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request, EntityManagerInterface $entityManager)
     {
-        $em = $this->getDoctrine()->getManager();
-        $roleClass = $em->getRepository('Role')->getClassName();
+        $roleClass = $entityManager->getRepository('Role')->getClassName();
         $role = new $roleClass();
         $form = $this->createForm(RoleType::class, $role)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'The role has been saved.');
-            $em->persist($role);
-            $em->flush();
+            $entityManager->persist($role);
+            $entityManager->flush();
 
             return $this->redirectToRoute('rabble_admin_role_index');
         }
@@ -51,13 +51,12 @@ class RoleController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, Role $role)
+    public function editAction(Request $request, Role $role, EntityManagerInterface $entityManager)
     {
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(RoleType::class, $role)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'The role has been saved.');
-            $em->flush();
+            $entityManager->flush();
             $form = $this->createForm(RoleType::class, $role);
         }
 
@@ -73,11 +72,10 @@ class RoleController extends AbstractController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function deleteAction(Role $role)
+    public function deleteAction(Role $role, EntityManagerInterface $entityManager)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($role);
-        $em->flush();
+        $entityManager->remove($role);
+        $entityManager->flush();
 
         return $this->redirectToRoute('rabble_admin_role_index');
     }

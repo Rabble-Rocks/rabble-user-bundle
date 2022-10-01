@@ -2,6 +2,7 @@
 
 namespace Rabble\UserBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Rabble\AdminBundle\Ui\Panel\ContentPanel;
 use Rabble\AdminBundle\Ui\Panel\Tab;
 use Rabble\AdminBundle\Ui\Panel\TabbedPanel;
@@ -59,17 +60,16 @@ class UserController extends AbstractController
     /**
      * @Security("is_granted('user.create')")
      */
-    public function createAction(Request $request): Response
+    public function createAction(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $em = $this->getDoctrine()->getManager();
-        $userClass = $em->getRepository('User')->getClassName();
+        $userClass = $entityManager->getRepository('User')->getClassName();
         /** @var User $user */
         $user = new $userClass();
         $form = $this->createForm(UserType::class, $user)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'The user has been saved.');
-            $em->persist($user);
-            $em->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('rabble_admin_user_index');
         }
@@ -111,14 +111,13 @@ class UserController extends AbstractController
      * @ParamConverter("user", converter="implemented_entity", options={"entity" = "User"})
      * @Security("(is_granted(request.attributes.get('user')) || is_granted('role.overrule')) && is_granted('user.edit')")
      */
-    public function editAction(Request $request, User $user): Response
+    public function editAction(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(UserType::class, $user)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('success', 'The user has been saved.');
-            $em->flush();
-            $em->refresh($user);
+            $entityManager->flush();
+            $entityManager->refresh($user);
             $form = $this->createForm(UserType::class, $user);
         }
         $formView = $form->createView();
@@ -161,14 +160,13 @@ class UserController extends AbstractController
      * @ParamConverter("user", converter="implemented_entity", options={"entity" = "User"})
      * @Security("(is_granted(request.attributes.get('user')) || is_granted('role.overrule')) && is_granted('user.delete')")
      */
-    public function deleteAction(User $user): Response
+    public function deleteAction(User $user, EntityManagerInterface $entityManager): Response
     {
         if ($user === $this->getUser()) {
             return $this->redirectToRoute('rabble_admin_user_index');
         }
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($user);
-        $em->flush();
+        $entityManager->remove($user);
+        $entityManager->flush();
 
         return $this->redirectToRoute('rabble_admin_user_index');
     }
